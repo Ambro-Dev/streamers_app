@@ -6,3 +6,18 @@
   flex-direction: column;
   margin-top: 90px;
 }
+
+.top {
+  align-items: center;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+@media screen and (max-width: 600px) {
+  .top {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,16 +1,36 @@
 .box {
     display: flex;
     flex-direction: column;
+    padding: 10px;
 }
 
 .box input {
-    padding: 10px;
+    padding: 15px;
     border: none;
     outline: none;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 
 .box label {
     margin-bottom: 5px;
+}
+
+.list {
+    width: 100%;
+    overflow-y: auto;
+    max-height: 300px;
+    border-radius: 5px;
+}
+
+li {
+    list-style: none;
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+li:not(:last-of-type) {
+  border-bottom: 2px solid black;
 }
