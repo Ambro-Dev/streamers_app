@@ -3,24 +3,24 @@ import PropTypes from "prop-types";
 import "./texttyping.css";
 
 const TextTyping = ({ text, speed }) => {
-  const [string, setString] = React.useState("Welcome!");
+  const [string, setString] = React.useState("");
   const [retype, setRetype] = React.useState(false);
 
   React.useEffect(() => {
     if (retype) {
       const interval = setInterval(() => {
         setString((prevString) => {
-          if (prevString.length === text.length) {
+          if (prevString.length === text[1].length) {
             clearInterval(interval);
             return prevString; // Reset the string to the initial value
           }
-          return text.slice(0, prevString.length + 1);
+          return text[1].slice(0, prevString.length + 1);
         });
-      }, 200);
+      }, speed);
 
       return () => clearInterval(interval);
     }
-  }, [retype, text]);
+  }, [retype, text, speed]);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -32,15 +32,20 @@ const TextTyping = ({ text, speed }) => {
         }
         return prevString.slice(0, -1);
       });
-    }, 200);
+    }, speed);
 
     return () => clearInterval(interval);
-  }, [text]);
+  }, [speed, text]);
 
   return (
     <div className="text">
-      <span>{string}</span>
-      <span className="cursor">|</span>
+      <div className="text_welcome">
+        <span>Welcome!</span>
+      </div>
+      <div className="text_typing">
+        <span>{string}</span>
+        <span className="cursor">|</span>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import "./App.css";
+import Button from "./components/Button";
 import Card from "./components/Card";
 import Input from "./components/Input";
 import InputDropdown from "./components/InputDropdown";
@@ -21,6 +22,7 @@ function App() {
             <Input title="Name" />
             <Input textarea rows={3} title="Description" />
             <InputDropdown options={options} title="Platform" />
+            <Button>Submit</Button>
           </Card>
         </div>
 

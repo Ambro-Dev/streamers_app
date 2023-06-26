@@ -1,12 +1,12 @@
 nav {
-    color: white;
+    color: #f4f3fd;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 5%;
     height: 50px;
     width: 90%;
-    background-color: #101010;
+    background-color: #1B2223;
     position: absolute;
     top: 0;
     left: 0;
@@ -16,6 +16,6 @@ nav {
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
-    color: white;
+    color: #f4f3fd;
     text-transform: capitalize;
 }
