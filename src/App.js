@@ -17,7 +17,10 @@ function App() {
       <Navbar />
       <div className="App">
         <div className="top">
-          <TextTyping text="Submit new streamer" speed={100} />
+          <TextTyping
+            texts={["Submit new streamer", "Select streamer from the list"]}
+            speed={200}
+          />
           <Card className="right" title="Submit streamer">
             <Input title="Name" />
             <Input textarea rows={3} title="Description" />

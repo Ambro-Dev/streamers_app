@@ -4,13 +4,13 @@ import "./card.css";
 
 const Card = ({ title, children }) => (
   <div className="card">
-    <h2>{title}</h2>
+    {title && <h2>{title}</h2>}
     {children}
   </div>
 );
 
 Card.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   children: PropTypes.node,
 };
 export default Card;

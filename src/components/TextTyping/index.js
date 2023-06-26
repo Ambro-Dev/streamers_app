@@ -2,32 +2,33 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./texttyping.css";
 
-const TextTyping = ({ text, speed }) => {
+const TextTyping = ({ texts, speed }) => {
   const [string, setString] = React.useState("");
-  const [retype, setRetype] = React.useState(false);
+  const [index, setIndex] = React.useState(0);
 
-  React.useEffect(() => {
-    if (retype) {
-      const interval = setInterval(() => {
-        setString((prevString) => {
-          if (prevString.length === text[1].length) {
-            clearInterval(interval);
-            return prevString; // Reset the string to the initial value
-          }
-          return text[1].slice(0, prevString.length + 1);
-        });
-      }, speed);
+  function typeText(text) {
+    const interval = setInterval(() => {
+      setString((prevString) => {
+        if (prevString.length === text.length) {
+          clearInterval(interval);
+          if (index === 0) setIndex(1);
+          else if (index === 2) setIndex(3);
+          return prevString; // Reset the string to the initial value
+        }
+        return text.slice(0, prevString.length + 1);
+      });
+    }, speed);
 
-      return () => clearInterval(interval);
-    }
-  }, [retype, text, speed]);
+    return () => clearInterval(interval);
+  }
 
-  React.useEffect(() => {
+  function deleteText() {
     const interval = setInterval(() => {
       setString((prevString) => {
         if (prevString.length === 0) {
           clearInterval(interval);
-          setRetype(true);
+          if (index === 1) setIndex(2);
+          else if (index === 3) setIndex(0);
           return ""; // Reset the string to the initial value
         }
         return prevString.slice(0, -1);
@@ -35,14 +36,33 @@ const TextTyping = ({ text, speed }) => {
     }, speed);
 
     return () => clearInterval(interval);
-  }, [speed, text]);
+  }
+
+  React.useEffect(() => {
+    switch (index) {
+      case 0:
+        typeText(texts[0]);
+        break;
+      case 1:
+        deleteText();
+        break;
+      case 2:
+        typeText(texts[1]);
+        break;
+      case 3:
+        deleteText();
+        break;
+      default:
+        break;
+    }
+  }, [index, texts, speed]);
 
   return (
-    <div className="text">
-      <div className="text_welcome">
+    <div className="text-box">
+      <div className="welcome">
         <span>Welcome!</span>
       </div>
-      <div className="text_typing">
+      <div className="text">
         <span>{string}</span>
         <span className="cursor">|</span>
       </div>
