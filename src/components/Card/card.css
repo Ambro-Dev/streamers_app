@@ -6,7 +6,7 @@
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   height: auto;
-  width: 100%;
+  width: calc(100% - 42px);
   padding: 10px;
   color: #f4f3fd;
   margin: 10px;

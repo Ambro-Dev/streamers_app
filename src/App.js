@@ -19,15 +19,16 @@ function App() {
         <div className="top">
           <TextTyping
             texts={["Submit new streamer", "Select streamer from the list"]}
-            speed={200}
+            speed={300}
           />
-          <Card className="right" title="Submit streamer">
+          <Card title="Submit streamer">
             <Input title="Name" />
             <Input textarea rows={3} title="Description" />
             <InputDropdown options={options} title="Platform" />
             <Button>Submit</Button>
           </Card>
         </div>
+        <Card title="Streamer list"></Card>
 
         <footer>Ambro-Dev</footer>
       </div>
