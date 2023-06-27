@@ -4,7 +4,11 @@ import Card from "./components/Card";
 import Input from "./components/Input";
 import InputDropdown from "./components/InputDropdown";
 import Navbar from "./components/Navbar";
+import Table from "./components/Table";
 import TextTyping from "./components/TextTyping";
+
+//Data
+import data from "./test-data/data";
 
 function App() {
   const options = [
@@ -12,6 +16,7 @@ function App() {
     { id: 2, value: "YouTube" },
     { id: 3, value: "Facebook" },
   ];
+
   return (
     <>
       <Navbar />
@@ -19,7 +24,7 @@ function App() {
         <div className="top">
           <TextTyping
             texts={["Submit new streamer", "Select streamer from the list"]}
-            speed={300}
+            speed={200}
           />
           <Card title="Submit streamer">
             <Input title="Name" />
@@ -28,7 +33,9 @@ function App() {
             <Button>Submit</Button>
           </Card>
         </div>
-        <Card title="Streamer list"></Card>
+        <Card>
+          <Table data={data} />
+        </Card>
 
         <footer>Ambro-Dev</footer>
       </div>

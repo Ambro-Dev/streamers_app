@@ -23,19 +23,21 @@ const TextTyping = ({ texts, speed }) => {
   }
 
   function deleteText() {
-    const interval = setInterval(() => {
-      setString((prevString) => {
-        if (prevString.length === 0) {
-          clearInterval(interval);
-          if (index === 1) setIndex(2);
-          else if (index === 3) setIndex(0);
-          return ""; // Reset the string to the initial value
-        }
-        return prevString.slice(0, -1);
-      });
-    }, speed);
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        setString((prevString) => {
+          if (prevString.length === 0) {
+            clearInterval(interval);
+            if (index === 1) setIndex(2);
+            else if (index === 3) setIndex(0);
+            return ""; // Reset the string to the initial value
+          }
+          return prevString.slice(0, -1);
+        });
+      }, speed);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }, 1000);
   }
 
   React.useEffect(() => {
