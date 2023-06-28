@@ -10,6 +10,7 @@
     outline: none;
     border-radius: 5px;
     margin-bottom: 2px;
+    font-size: 1rem;
 }
 
 .box label {
@@ -23,7 +24,8 @@
     border-radius: 5px;
     position: absolute;
     left: 10;
-    top: 84%;
+    top: 48%;
+    z-index: 10000;
 }
 
 li {
@@ -32,8 +34,26 @@ li {
     cursor: pointer;
     background-color: #f4f3fd;
     color: black;
+    display: flex;
+    align-items: center;
+}
+
+li:hover {
+    background-color: #0ef6cc;
+    color: black;
+}
+
+li span {
+    margin-left: 10px;
 }
 
 li:not(:last-of-type) {
   border-bottom: 2px solid black;
+}
+
+.input-icon {
+    position: absolute;
+    left: 30px;
+    top: 202px;
+    color: #0ef6cc;
 }

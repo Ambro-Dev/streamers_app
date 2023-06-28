@@ -19,6 +19,18 @@ button {
     margin: 10px;
 }
 
+button[disabled] {
+    background-color: #3A4F50;
+    color: #000;
+    cursor: unset;
+}
+
+button[disabled]:hover {
+    background-color: #3A4F50;
+    color: #000;
+    transform: unset;
+}
+
 button:hover {
     background-color: #0ef6cc;
     color: #000;

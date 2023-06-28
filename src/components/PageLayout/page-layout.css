@@ -1,0 +1,7 @@
+.page-layout {
+  width: clamp(300px, 100%, 1100px);
+  margin: 90px auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

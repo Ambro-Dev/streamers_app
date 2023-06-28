@@ -8,9 +8,11 @@ const InputDropdown = ({ options, title }) => {
   const [showList, setShowList] = React.useState(false);
   const [selectedPlatform, setSelectedPlatform] = React.useState("");
   const [filteredOptions, setFilteredOptions] = React.useState(options);
+  const [icon, setIcon] = React.useState(null);
 
   const handleSelect = (option) => {
     setSelectedPlatform(option.value);
+    setIcon(option.image);
     setShowList(false);
   };
 
@@ -34,11 +36,27 @@ const InputDropdown = ({ options, title }) => {
     setFilteredOptions(filterOptions);
   }, [options, selectedPlatform]);
 
+  React.useEffect(() => {
+    if (selectedPlatform === "") {
+      setIcon(null);
+    }
+  }, [selectedPlatform]);
+
   const id = title.toLowerCase();
   return (
     <div className="box">
       <label>{title}</label>
+      {icon && (
+        <img
+          className="input-icon"
+          src={icon}
+          alt="icon"
+          height={20}
+          width={20}
+        />
+      )}
       <input
+        style={{ paddingLeft: icon ? "40px" : "15px" }}
         type="text"
         list="platforms"
         ref={inputRef}
@@ -51,7 +69,15 @@ const InputDropdown = ({ options, title }) => {
         <div id="platforms" className="list" ref={listRef}>
           {filteredOptions.map((option) => (
             <li key={option.id} onClick={() => handleSelect(option)}>
-              {option.value}
+              {option.image && (
+                <img
+                  src={option.image}
+                  alt={`${option.value}`}
+                  height={20}
+                  width={20}
+                />
+              )}
+              <span>{option.value}</span>
             </li>
           ))}
         </div>
@@ -62,7 +88,11 @@ const InputDropdown = ({ options, title }) => {
 
 InputDropdown.propTypes = {
   options: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.number, value: PropTypes.string })
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
+      image: PropTypes.string,
+    })
   ).isRequired,
   title: PropTypes.string.isRequired,
 };
