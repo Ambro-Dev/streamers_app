@@ -19,7 +19,7 @@ const data = [
   {
     id: 2,
     name: "Asmongold",
-    platform: "Twitch",
+    platform: "Kickstarter",
     votes_up: 82,
     votes_down: 18,
     img: asmongold,
@@ -27,7 +27,7 @@ const data = [
   {
     id: 3,
     name: "Forsen",
-    platform: "Twitch",
+    platform: "Rumble",
     votes_up: 62,
     votes_down: 38,
     img: forsen,
@@ -51,7 +51,7 @@ const data = [
   {
     id: 6,
     name: "Sodapoppin",
-    platform: "Twitch",
+    platform: "Trovo",
     votes_up: 85,
     votes_down: 15,
     img: sodapoppin,
@@ -59,7 +59,7 @@ const data = [
   {
     id: 7,
     name: "XQC",
-    platform: "Twitch",
+    platform: "Youtube",
     votes_up: 92,
     votes_down: 8,
     img: xqc,

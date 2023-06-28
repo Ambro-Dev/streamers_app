@@ -28,7 +28,7 @@
     z-index: 10000;
 }
 
-li {
+.list li {
     list-style: none;
     padding: 10px;
     cursor: pointer;
@@ -38,16 +38,16 @@ li {
     align-items: center;
 }
 
-li:hover {
+.list li:hover {
     background-color: #0ef6cc;
     color: black;
 }
 
-li span {
+.list li span {
     margin-left: 10px;
 }
 
-li:not(:last-of-type) {
+.list li:not(:last-of-type) {
   border-bottom: 2px solid black;
 }
 

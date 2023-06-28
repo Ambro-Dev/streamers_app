@@ -17,7 +17,16 @@ import rumble from "../../assets/platforms/rumble.png";
 import trovo from "../../assets/platforms/trovo.png";
 
 const Table = ({ data }) => {
+  const platforms = [
+    { id: 1, name: "Youtube", image: youtube },
+    { id: 2, name: "Twitch", image: twitch },
+    { id: 3, name: "Kickstarter", image: kick },
+    { id: 4, name: "Rumble", image: rumble },
+    { id: 5, name: "Trovo", image: trovo },
+  ];
   const [sort, setSort] = React.useState("name_asc");
+  const [filteredPlatforms, setFilteredPlatforms] = React.useState(platforms);
+  const [showFilter, setShowFilter] = React.useState(false);
   const [filteredData, setFilteredData] = React.useState(data);
   const [selectedPage, setSelectedPage] = React.useState(1);
 
@@ -223,6 +232,18 @@ const Table = ({ data }) => {
     return pagination;
   };
 
+  const filterPlatforms = () => {
+    const newArray = filteredData.filter((item) => {
+      const itemName = item.platform.toLowerCase();
+      const platformsFiltered = filteredPlatforms.filter((platform) => {
+        const platformName = platform.name.toLowerCase();
+        return itemName.includes(platformName);
+      });
+      return platformsFiltered.length > 0;
+    });
+    setFilteredData(newArray);
+  };
+
   return (
     <>
       <div className="search">
@@ -249,7 +270,10 @@ const Table = ({ data }) => {
               />
             )}
           </div>
-          <div className="table-header-item">
+          <div
+            className="table-header-item"
+            onClick={() => setShowFilter(true)}
+          >
             <span>Platform</span>
             <img
               className="filter-arrow"
@@ -259,6 +283,39 @@ const Table = ({ data }) => {
               alt="filter-arrow"
             />
           </div>
+          {showFilter && (
+            <div className="platform-filter">
+              {platforms.map((platform) => (
+                <div
+                  className="platform-filter-item"
+                  key={platform.id}
+                  onClick={() => {
+                    const newArray = filteredPlatforms.filter(
+                      (item) =>
+                        item.name.toLowerCase() !== platform.name.toLowerCase()
+                    );
+                    setFilteredData(newArray);
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={filteredPlatforms.map(
+                      (item) =>
+                        item.name.toLowerCase() === platform.name.toLowerCase()
+                    )}
+                  />
+                  <img
+                    src={platform.image}
+                    height={20}
+                    width={20}
+                    alt={`platform-${platform.name}`}
+                  />
+                  <span>{platform.name}</span>
+                </div>
+              ))}
+              <button onClick={() => filterPlatforms()}>Apply</button>
+            </div>
+          )}
           <div
             className="table-header-item"
             onClick={() => changeFilter("votes")}

@@ -1,4 +1,4 @@
-button {
+.button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -12,27 +12,27 @@ button {
     width: 100%;
 }
 
-.button {
+.button-box {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
 }
 
-button[disabled] {
+.button[disabled] {
     background-color: #3A4F50;
     color: #000;
     cursor: unset;
 }
 
-button[disabled]:hover {
+.button[disabled]:hover {
     background-color: #3A4F50;
     color: #000;
     transform: unset;
 }
 
-button:hover {
+.button:hover {
     background-color: #0ef6cc;
     color: #000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }

@@ -52,6 +52,57 @@
     cursor: pointer;
 }
 
+.platform-filter {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 10px;
+    cursor: pointer;
+    border: #000 1px solid;
+    border-radius: 5px;
+    width: auto;
+    padding: 15px;
+    background-color: #3A4F50;
+    color: #0ef6cc;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: absolute;
+    left: 40%;
+}
+
+.platform-filter-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    margin: 5px 0;
+    cursor: pointer;
+    color: #f4f3fd;
+}
+
+.platform-filter button {
+    background-color: #0ef6cc;
+    border: none;
+    outline: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.platform-filter-item img {
+    margin-right: 10px;
+}
+
+.platform-filter-item input {
+    margin-right: 10px;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
