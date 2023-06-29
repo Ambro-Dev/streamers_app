@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import "./inputdropdown.css";
 import React from "react";
 
-const InputDropdown = ({ options, title }) => {
+const InputDropdown = ({ options, title, setValue, value }) => {
   const inputRef = React.useRef(null);
   const listRef = React.useRef(null);
   const [showList, setShowList] = React.useState(false);
@@ -11,10 +11,16 @@ const InputDropdown = ({ options, title }) => {
   const [icon, setIcon] = React.useState(null);
 
   const handleSelect = (option) => {
-    setSelectedPlatform(option.value);
-    setIcon(option.image);
+    setSelectedPlatform(option.name);
+    setValue(option.name);
+    const image = `${process.env.REACT_APP_SERVER_URL}/platforms/${option.image}`;
+    setIcon(image);
     setShowList(false);
   };
+
+  React.useEffect(() => {
+    setSelectedPlatform(value);
+  }, [value]);
 
   React.useEffect(() => {
     const handleClickOutside = (e) => {
@@ -28,7 +34,7 @@ const InputDropdown = ({ options, title }) => {
 
   React.useEffect(() => {
     const filterOptions = options.filter((option) => {
-      const optionName = option.value.toLowerCase();
+      const optionName = option.name.toLowerCase();
       const selectedPlatformName = selectedPlatform.toLowerCase();
       if (optionName.includes(selectedPlatformName)) return true;
       return false;
@@ -39,6 +45,7 @@ const InputDropdown = ({ options, title }) => {
   React.useEffect(() => {
     if (selectedPlatform === "") {
       setIcon(null);
+      setValue("");
     }
   }, [selectedPlatform]);
 
@@ -64,6 +71,8 @@ const InputDropdown = ({ options, title }) => {
         id={id}
         value={selectedPlatform}
         onChange={(e) => setSelectedPlatform(e.target.value)}
+        name={`${title.toLowerCase()}`}
+        autoComplete="off"
       />
       {showList && (
         <div id="platforms" className="list" ref={listRef}>
@@ -71,13 +80,13 @@ const InputDropdown = ({ options, title }) => {
             <li key={option.id} onClick={() => handleSelect(option)}>
               {option.image && (
                 <img
-                  src={option.image}
-                  alt={`${option.value}`}
+                  src={`${process.env.REACT_APP_SERVER_URL}/platforms/${option.image}`}
+                  alt={`${option.name}`}
                   height={20}
                   width={20}
                 />
               )}
-              <span>{option.value}</span>
+              <span>{option.name}</span>
             </li>
           ))}
         </div>
@@ -89,12 +98,14 @@ const InputDropdown = ({ options, title }) => {
 InputDropdown.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      value: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       image: PropTypes.string,
     })
   ).isRequired,
   title: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default InputDropdown;

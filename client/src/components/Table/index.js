@@ -1,6 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosHandler } from "../../api/axios";
+import countVotes from "../../hooks/countVotes";
+
+//default image
+import default_image from "../../assets/default.png";
 
 //Styles
 import "./table.css";
@@ -14,7 +18,6 @@ import filter from "../../assets/icons/filter.svg";
 import checkbox from "../../assets/icons/checkbox.svg";
 import empty_checkbox from "../../assets/icons/empty-checkbox.svg";
 import close from "../../assets/icons/close.svg";
-import axios from "axios";
 
 const Table = () => {
   const navigate = useNavigate();
@@ -129,17 +132,27 @@ const Table = () => {
       }
     } else {
       if (!sort.includes(filter)) {
-        const sortedData = filteredData.sort((a, b) => b.votes_up - a.votes_up);
+        const sortedData = filteredData.sort(
+          (a, b) =>
+            b.votes_up / (b.votes_up + b.votes_down) -
+            a.votes_up / (a.votes_up + a.votes_down)
+        );
         setSort(`${filter}_asc`);
         setFilteredData(sortedData);
       } else if (sort.includes(`${filter}_asc`)) {
         const sortedData = filteredData.sort(
-          (a, b) => b.votes_down - a.votes_down
+          (a, b) =>
+            a.votes_up / (a.votes_up + a.votes_down) -
+            b.votes_up / (b.votes_up + b.votes_down)
         );
         setSort(`${filter}_desc`);
         setFilteredData(sortedData);
       } else {
-        const sortedData = filteredData.sort((a, b) => b.votes_up - a.votes_up);
+        const sortedData = filteredData.sort(
+          (a, b) =>
+            b.votes_up / (b.votes_up + b.votes_down) -
+            a.votes_up / (a.votes_up + a.votes_down)
+        );
         setSort(`${filter}_asc`);
         setFilteredData(sortedData);
       }
@@ -152,6 +165,10 @@ const Table = () => {
     const platformImage = platforms.find(
       (platform) => platform.name.toLowerCase() === platformName
     );
+
+    if (!platformImage) {
+      return null;
+    }
 
     return `${process.env.REACT_APP_SERVER_URL}/platforms/${platformImage.image}`;
   }
@@ -311,21 +328,6 @@ const Table = () => {
     }
   }
 
-  function countVotes(type, streamer) {
-    if (type === "up") {
-      const votes = Math.round(
-        (streamer.votes_up / (streamer.votes_down + streamer.votes_up)) * 100
-      );
-      return votes;
-    } else {
-      const votes = Math.round(
-        (streamer.votes_down / (streamer.votes_up + streamer.votes_down)) * 100
-      );
-
-      return votes;
-    }
-  }
-
   return (
     <>
       <div className="search">
@@ -333,6 +335,7 @@ const Table = () => {
           type="text"
           placeholder="Search..."
           onChange={(e) => handleSearch(e)}
+          name="search"
         />
       </div>
       <div className="table">
@@ -426,8 +429,12 @@ const Table = () => {
                   index >= (selectedPage - 1) * 10 && index < selectedPage * 10
               )
               .map((item) => {
-                const votesUp = countVotes("up", item);
-                const votesDown = countVotes("down", item);
+                const votesUp = item.votes_up
+                  ? countVotes("up", item.votes_up, item.votes_down)
+                  : 0;
+                const votesDown = item.votes_down
+                  ? countVotes("down", item.votes_up, item.votes_down)
+                  : 0;
                 return (
                   <div className="table-body-row" key={item.id}>
                     <div
@@ -437,7 +444,11 @@ const Table = () => {
                       <div className="img-box">
                         <img
                           className="image"
-                          src={`${process.env.REACT_APP_SERVER_URL}/streamers/${item.image}`}
+                          src={
+                            item.image
+                              ? `${process.env.REACT_APP_SERVER_URL}/streamers/${item.image}`
+                              : default_image
+                          }
                           height={100}
                           width={100}
                           alt="xqc"
