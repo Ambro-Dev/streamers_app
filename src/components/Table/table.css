@@ -66,10 +66,19 @@
     color: #0ef6cc;
     font-weight: bold;
     font-size: 14px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     margin-bottom: 10px;
     position: absolute;
     left: 40%;
+}
+
+.platform-filter-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #0ef6cc;
 }
 
 .platform-filter-item {
@@ -85,6 +94,7 @@
 .platform-filter button {
     background-color: #0ef6cc;
     border: none;
+    padding: 5px 0;
     outline: none;
     color: #000;
     font-weight: bold;

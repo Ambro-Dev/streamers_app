@@ -8,6 +8,9 @@ import arrow_down from "../../assets/icons/arrow-down.svg";
 import up_vote from "../../assets/icons/up_vote.svg";
 import down_vote from "../../assets/icons/down_vote.svg";
 import filter from "../../assets/icons/filter.svg";
+import checkbox from "../../assets/icons/checkbox.svg";
+import empty_checkbox from "../../assets/icons/empty-checkbox.svg";
+import close from "../../assets/icons/close.svg";
 
 //platforms images
 import youtube from "../../assets/platforms/youtube.png";
@@ -34,7 +37,7 @@ const Table = ({ data }) => {
     setSelectedPage(1);
     if (filter === "name") {
       if (!sort.includes(filter)) {
-        const sortedData = data.sort((a, b) => {
+        const sortedData = filteredData.sort((a, b) => {
           let fa = a.name.toLowerCase(),
             fb = b.name.toLowerCase();
 
@@ -49,7 +52,7 @@ const Table = ({ data }) => {
         setSort(`${filter}_asc`);
         setFilteredData(sortedData);
       } else if (sort.includes(`${filter}_asc`)) {
-        const sortedData = data.sort((a, b) => {
+        const sortedData = filteredData.sort((a, b) => {
           let fa = a.name.toLowerCase(),
             fb = b.name.toLowerCase();
 
@@ -64,7 +67,7 @@ const Table = ({ data }) => {
         setSort(`${filter}_desc`);
         setFilteredData(sortedData);
       } else {
-        const sortedData = data.sort((a, b) => {
+        const sortedData = filteredData.sort((a, b) => {
           let fa = a.name.toLowerCase(),
             fb = b.name.toLowerCase();
 
@@ -81,15 +84,17 @@ const Table = ({ data }) => {
       }
     } else {
       if (!sort.includes(filter)) {
-        const sortedData = data.sort((a, b) => b.votes_up - a.votes_up);
+        const sortedData = filteredData.sort((a, b) => b.votes_up - a.votes_up);
         setSort(`${filter}_asc`);
         setFilteredData(sortedData);
       } else if (sort.includes(`${filter}_asc`)) {
-        const sortedData = data.sort((a, b) => b.votes_down - a.votes_down);
+        const sortedData = filteredData.sort(
+          (a, b) => b.votes_down - a.votes_down
+        );
         setSort(`${filter}_desc`);
         setFilteredData(sortedData);
       } else {
-        const sortedData = data.sort((a, b) => b.votes_up - a.votes_up);
+        const sortedData = filteredData.sort((a, b) => b.votes_up - a.votes_up);
         setSort(`${filter}_asc`);
         setFilteredData(sortedData);
       }
@@ -233,16 +238,43 @@ const Table = ({ data }) => {
   };
 
   const filterPlatforms = () => {
-    const newArray = filteredData.filter((item) => {
+    const newArray = data.filter((item) => {
       const itemName = item.platform.toLowerCase();
       const platformsFiltered = filteredPlatforms.filter((platform) => {
         const platformName = platform.name.toLowerCase();
-        return itemName.includes(platformName);
+        return itemName === platformName;
       });
       return platformsFiltered.length > 0;
     });
     setFilteredData(newArray);
+    setShowFilter(false);
   };
+
+  const handleCheckbox = (platform) => {
+    const includes = filteredPlatforms.filter(
+      (filter) => filter.name === platform.name
+    );
+    console.log(includes.length);
+    if (includes.length > 0) {
+      const newArray = filteredPlatforms.filter(
+        (item) => item.name.toLowerCase() !== platform.name.toLowerCase()
+      );
+      setFilteredPlatforms(newArray);
+    } else {
+      setFilteredPlatforms([...filteredPlatforms, platform]);
+    }
+  };
+
+  function checkboxIcon(platform) {
+    const find = filteredPlatforms.filter(
+      (item) => item.name.toLowerCase() === platform.name.toLowerCase()
+    );
+    if (find.length > 0) {
+      return checkbox;
+    } else {
+      return empty_checkbox;
+    }
+  }
 
   return (
     <>
@@ -285,24 +317,27 @@ const Table = ({ data }) => {
           </div>
           {showFilter && (
             <div className="platform-filter">
+              <div className="platform-filter-top">
+                <span>Select:</span>
+                <img
+                  src={close}
+                  alt="exit"
+                  height={20}
+                  width={20}
+                  onClick={() => setShowFilter(false)}
+                />
+              </div>
               {platforms.map((platform) => (
                 <div
                   className="platform-filter-item"
                   key={platform.id}
-                  onClick={() => {
-                    const newArray = filteredPlatforms.filter(
-                      (item) =>
-                        item.name.toLowerCase() !== platform.name.toLowerCase()
-                    );
-                    setFilteredData(newArray);
-                  }}
+                  onClick={() => handleCheckbox(platform)}
                 >
-                  <input
-                    type="checkbox"
-                    checked={filteredPlatforms.map(
-                      (item) =>
-                        item.name.toLowerCase() === platform.name.toLowerCase()
-                    )}
+                  <img
+                    src={checkboxIcon(platform)}
+                    height={20}
+                    width={20}
+                    alt={`checked-${platform.name}`}
                   />
                   <img
                     src={platform.image}
