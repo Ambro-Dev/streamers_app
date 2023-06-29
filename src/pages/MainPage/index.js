@@ -40,7 +40,7 @@ function MainPage() {
             <Input title="Name" />
             <InputDropdown options={options} title="Platform" />
             <Input textarea rows={3} title="Description" />
-            <Button disabled>Submit</Button>
+            <Button>Submit</Button>
           </Card>
         </div>
         <Card>

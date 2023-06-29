@@ -57,7 +57,6 @@
     justify-content: center;
     flex-direction: column;
     margin-right: 10px;
-    cursor: pointer;
     border: #000 1px solid;
     border-radius: 5px;
     width: auto;
@@ -79,6 +78,12 @@
     margin-bottom: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid #0ef6cc;
+}
+
+.platform-filter-top img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
 }
 
 .platform-filter-item {
@@ -103,6 +108,11 @@
     text-transform: uppercase;
     cursor: pointer;
     margin-top: 10px;
+}
+
+.platform-filter button:hover {
+    transform: scale(1.03);
+    transition: all 0.3s ease;
 }
 
 .platform-filter-item img {

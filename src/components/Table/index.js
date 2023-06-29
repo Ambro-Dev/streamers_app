@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+//Styles
 import "./table.css";
 
 //Icons
@@ -20,6 +23,7 @@ import rumble from "../../assets/platforms/rumble.png";
 import trovo from "../../assets/platforms/trovo.png";
 
 const Table = ({ data }) => {
+  const navigate = useNavigate();
   const platforms = [
     { id: 1, name: "Youtube", image: youtube },
     { id: 2, name: "Twitch", image: twitch },
@@ -376,7 +380,10 @@ const Table = ({ data }) => {
               )
               .map((item) => (
                 <div className="table-body-row" key={item.id}>
-                  <div className="table-body-item">
+                  <div
+                    className="table-body-item"
+                    onClick={() => navigate(`/streamer/${item.id}`)}
+                  >
                     <div className="img-box">
                       <img
                         className="image"
