@@ -1,6 +1,10 @@
 {
-  "name": "backend",
+  "name": "streamers-app",
   "version": "0.1.0",
+  "author": {
+    "name": "Ambro-Dev",
+    "repo": "https://github.com/Ambro-Dev/streamers_app.git"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -23,8 +27,8 @@
   },
   "scripts": {
     "start": "node server",
-    "dev": "concurrently \"nodemon server\" \"cd client && npm start\"",
-    "build": "concurrently \"node server\" \"cd client && serve -s build\""
+    "server": "nodemon server",
+    "dev": "concurrently \"nodemon server\" \"cd client && npm start\""
   },
   "eslintConfig": {
     "extends": [
