@@ -23,7 +23,8 @@
   },
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "concurrently \"nodemon server\" \"cd client && npm start\"",
+    "build": "concurrently \"node server\" \"cd client && serve -s build\""
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
   }
 }

@@ -8,8 +8,11 @@ import TextTyping from "../../components/TextTyping";
 
 import PageLayout from "../../components/PageLayout";
 import AddStreamerCard from "../../components/AddStreamerCard";
+import React from "react";
 
 function MainPage() {
+  const [reload, setReload] = React.useState(false);
+
   return (
     <PageLayout>
       <div className="App">
@@ -18,10 +21,10 @@ function MainPage() {
             texts={["Submit new streamer", "Select streamer from the list"]}
             speed={200}
           />
-          <AddStreamerCard />
+          <AddStreamerCard reload={reload} setReload={setReload} />
         </div>
         <Card>
-          <Table />
+          <Table reload={reload} setReload={setReload} />
         </Card>
       </div>
     </PageLayout>

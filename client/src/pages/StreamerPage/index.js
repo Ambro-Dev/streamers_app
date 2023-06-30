@@ -55,7 +55,7 @@ const StreamerPage = () => {
   React.useEffect(() => {
     const up = countVotes("up", votesUp, votesDown);
     const down = countVotes("down", votesUp, votesDown);
-    if (up === 0 && down === 0) {
+    if (!up && !down) {
       setVotesUpPercentage(50);
       setVotesDownPercentage(50);
       return;
@@ -250,13 +250,11 @@ const StreamerPage = () => {
                 <div className="all-votes-box-percentage">
                   <div className="all-votes-box-percentage-up">
                     <span>Votes up:</span>
-                    <span className="result-up">{votesUpPercentage || 0}%</span>
+                    <span className="result-up">{votesUpPercentage}%</span>
                   </div>
                   <div className="all-votes-box-percentage-down">
                     <span>Votes down:</span>
-                    <span className="result-down">
-                      {votesDownPercentage || 0}%
-                    </span>
+                    <span className="result-down">{votesDownPercentage}%</span>
                   </div>
                 </div>
                 <div className="all-votes-box-bar">

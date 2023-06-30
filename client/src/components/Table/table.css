@@ -19,7 +19,7 @@
     justify-content: end;
 }
 
-.search input {
+.search > input {
     width: 200px;
     height: 100%;
     border-radius: 15px;
@@ -96,7 +96,7 @@
     color: #f4f3fd;
 }
 
-.platform-filter button {
+.platform-filter > button {
     background-color: #0ef6cc;
     border: none;
     padding: 5px 0;
@@ -227,7 +227,7 @@
         margin-left: 1%;
     }
 
-    .table-body-item img {
+    .table-body-item > img {
         height: 20px;
         width: 20px;
     }
@@ -245,7 +245,7 @@
         font-size: 12px;
     }
 
-    .table-body-item span {
+    .table-body-item > span {
         margin-left: 0;
     }
 
@@ -254,11 +254,11 @@
         height: 40px;
     }
 
-    .votes-down-box img {
+    .votes-down-box > img {
         width: 20px;
         height: 20px;
     }
-    .votes-up-box img {
+    .votes-up-box > img {
         width: 20px;
         height: 20px;
     }

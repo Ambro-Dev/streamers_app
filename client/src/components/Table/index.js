@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosHandler } from "../../api/axios";
 import countVotes from "../../hooks/countVotes";
+import PropTypes from "prop-types";
 
 //default image
 import default_image from "../../assets/default.png";
@@ -19,9 +20,8 @@ import checkbox from "../../assets/icons/checkbox.svg";
 import empty_checkbox from "../../assets/icons/empty-checkbox.svg";
 import close from "../../assets/icons/close.svg";
 
-const Table = () => {
+const Table = ({ reload, setReload }) => {
   const navigate = useNavigate();
-
   const [data, setData] = React.useState([]);
 
   const [sort, setSort] = React.useState("name_asc");
@@ -79,7 +79,7 @@ const Table = () => {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [reload]);
 
   const changeFilter = (filter) => {
     setSelectedPage(1);
@@ -494,6 +494,11 @@ const Table = () => {
       </div>
     </>
   );
+};
+
+Table.propTypes = {
+  reload: PropTypes.bool,
+  setReload: PropTypes.func,
 };
 
 export default Table;

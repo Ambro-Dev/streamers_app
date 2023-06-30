@@ -7,17 +7,17 @@ const styles = {
   outline: "none",
   borderRadius: 5,
   marginBottom: 10,
-  width: "auto",
   height: 100,
   resize: "none",
   overfolwY: "auto",
+  width: "calc(100% - 20px)",
 };
 
 const Input = ({ title, textarea, rows, setValue, value }) => {
   const id = title.toLowerCase();
   return (
     <div className="box">
-      <label>{title}</label>
+      <label className="label">{title}</label>
       {textarea ? (
         <textarea
           rows={rows}

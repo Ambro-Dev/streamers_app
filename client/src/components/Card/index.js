@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./card.css";
 
-const Card = ({ title, children }) => (
-  <div className="card">
+const Card = ({ title, children, style }) => (
+  <div className="card" style={style}>
     {title && <h2>{title}</h2>}
     {children}
   </div>
@@ -12,5 +12,6 @@ const Card = ({ title, children }) => (
 Card.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
+  style: PropTypes.object,
 };
 export default Card;
